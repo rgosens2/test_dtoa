@@ -22,7 +22,8 @@ double values[] = {
     std::numeric_limits<double>::denorm_min(), // smallest subnormal
     std::numeric_limits<double>::min(),        // smallest normal
     std::numeric_limits<double>::max(),
-    -std::numeric_limits<double>::max(), M_PI,
+    -std::numeric_limits<double>::max(),
+    M_PI,
     42.0, 1000.0,
     std::numeric_limits<double>::infinity(),
     -std::numeric_limits<double>::infinity(),
