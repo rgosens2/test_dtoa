@@ -23,7 +23,11 @@ double values[] = {
     std::numeric_limits<double>::min(),        // smallest normal
     std::numeric_limits<double>::max(),
     -std::numeric_limits<double>::max(), M_PI,
-    42.0, 1000.0
+    42.0, 1000.0,
+    std::numeric_limits<double>::infinity(),
+    -std::numeric_limits<double>::infinity(),
+    std::numeric_limits<double>::quiet_NaN(),
+    -std::numeric_limits<double>::quiet_NaN(),
 };
 
 
