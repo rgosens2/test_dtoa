@@ -1,0 +1,8 @@
+{
+    "C_Cpp.files.exclude": {
+        "old": true,
+        "test": true,
+        "**/.vscode": true,
+        "**/.vs": true
+    }
+}
