@@ -125,11 +125,12 @@ int main()
     printf("zmij:\t");
     char buf[zmij::double_buffer_size]{};
 
-    perf p1;
     char* end = nullptr;
+
+    perf p1;
     for (uint i = 0; i < num_runs; ++i) {
         //end = zmij::write(buf, sizeof buf, 3.14159e00);
-        end = zmij::write(buf, sizeof buf, values[i%std::size(values)]);
+        end = zmij::write(buf, sizeof buf, values[i % std::size(values)]);
     }
     //char* end = zmij::write(buf, sizeof buf, 3.14159e00);
     double elapsed1 = p1.elapsed()/num_runs;
@@ -142,13 +143,14 @@ int main()
 
     // xjb
     printf("xjb:\t");
-    char buf2[zmij::double_buffer_size]{};
+    char buf2[33]{}; // require buf size >= 33 byte
+
+    char* end2 = nullptr;
 
     perf p2;
-    char* end2 = nullptr;
     for (uint i = 0; i < num_runs; ++i) {
         //end2 = xjb64(3.14159e00, buf2);
-        end2 = xjb64(values[i%std::size(values)], buf2);
+        end2 = xjb64(values[i % std::size(values)], buf2);
     }
     double elapsed2 = p2.elapsed()/num_runs;
 
