@@ -113,7 +113,7 @@ int main()
         // downstream parser immediately knows the token represents a floating-point
         // number rather than an integer.
         static int i = 1;
-        printf("Value %d: %.17g\nzmij: %.*s\nxjb: %.*s\n\n", i++, v, static_cast<int>(end1 - buf1), buf1, static_cast<int>(end2 - buf2), buf2);
+        printf("v%d:\t%.17g\nzmij:\t%.*s\nxjb:\t%.*s\n\n", i++, v, static_cast<int>(end1 - buf1), buf1, static_cast<int>(end2 - buf2), buf2);
     }
     ///////////////
 
