@@ -66,7 +66,7 @@ int main()
 {
     //printf("to_chars:\t");
     //show_to_chars(42);
-    // Not in Clang 14:
+    // NOTE: Not in Clang 14.0.0:
     //show_to_chars(+3.14159F);
     //show_to_chars(-3.14159, std::chars_format::fixed);
     //show_to_chars(-3.14159, std::chars_format::scientific, 3);
