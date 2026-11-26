@@ -29,7 +29,11 @@ double values[] = {
     -std::numeric_limits<double>::infinity(),
     std::numeric_limits<double>::quiet_NaN(),
     -std::numeric_limits<double>::quiet_NaN(),
-    10000000000000002 // 17 digits
+    10000000000000002, // 17 digits
+    9.007199254740993e15,
+    1.0000000000000002e16,
+    10000000000000002,
+    0.10000000000000002
 };
 
 
