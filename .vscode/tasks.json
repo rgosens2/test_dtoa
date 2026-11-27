@@ -46,9 +46,9 @@
         "-fansi-escape-codes",
         "-g",
         "${file}",
-        "zmij/zmij.cc",
-        "xjb/xjb64.cpp",
-        "schubfach/schubfach.cc",
+        "../zmij/zmij.cc",
+        "../xjb/xjb64.cpp",
+        "../schubfach/schubfach.cc",
         "-o",
         "${fileDirname}/${fileBasenameNoExtension}"
       ],
