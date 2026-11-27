@@ -8,6 +8,7 @@
 
 #include "zmij/zmij.h"
 #include "xjb/xjb64.h"
+#include "schubfach/schubfach.h"
 
 
 #include <cmath>
@@ -92,9 +93,13 @@ int main()
         char* end1 = zmij::write(buf1, sizeof buf1, v);
         std::string_view str1(buf1, end1 - buf1);
 
-        char buf2[zmij::double_buffer_size]{};
+        char buf2[33]{};  // require buf size >= 33 byte
         char* end2 = xjb64(v, buf2);
         std::string_view str2(buf2, end2 - buf2);
+
+        char buf3[25]{};  // // buf size >= 25 bytes
+        char* end3 = schubfach::dtoa(v, buf3);
+        std::string_view str3(buf3, end3 - buf3);
 
         // if (str1 != str2) {
         //     std::cout << "Mismatch for value: " << v << '\n';
@@ -117,7 +122,12 @@ int main()
         // downstream parser immediately knows the token represents a floating-point
         // number rather than an integer.
         static int i = 1;
-        printf("v%d:\t%.17g\nzmij:\t%.*s\nxjb:\t%.*s\n\n", i++, v, static_cast<int>(end1 - buf1), buf1, static_cast<int>(end2 - buf2), buf2);
+        //printf("v%d:\t%.17g\nzmij:\t%.*s\nxjb:\t%.*s\n\n", i++, v, static_cast<int>(end1 - buf1), buf1, static_cast<int>(end2 - buf2), buf2);
+        printf("v%d:\t\t%.17g\n", i++, v);
+        printf("zmij:\t\t%.*s\n", static_cast<int>(end1 - buf1), buf1);
+        printf("xjb:\t\t%.*s\n", static_cast<int>(end2 - buf2), buf2);
+        printf("schubfach:\t%.*s\n", static_cast<int>(end3 - buf3), buf3);
+        printf("\n");
     }
     ///////////////
 
@@ -126,7 +136,7 @@ int main()
     printf("Starting performance test with %d runs...\n", num_runs);
 
     // zmij
-    printf("zmij:\t");
+    printf("zmij:\t\t");
     char buf[zmij::double_buffer_size]{};
 
     char* end = nullptr;
@@ -142,11 +152,12 @@ int main()
     //std::string_view str(buf, end - buf);
     //std::cout << std::quoted(str) << '\t';
     //printf("%.*s\n", static_cast<int>(end - buf), buf);
-    printf("%.2f ns\n", elapsed1*1e9);
+    printf("%10.2f ns\n", elapsed1*1e9);
+    ///////////////////////////////////////////////////////
 
 
     // xjb
-    printf("xjb:\t");
+    printf("xjb:\t\t");
     char buf2[33]{}; // require buf size >= 33 byte
 
     char* end2 = nullptr;
@@ -161,11 +172,32 @@ int main()
     //std::string_view str2(buf2, end2 - buf2);
     //std::cout << std::quoted(str2) << '\t';
     //printf("%.*s\n", static_cast<int>(end2 - buf2), buf2);
-    printf("%.2f ns\n", elapsed2*1e9);
+    printf("%10.2f ns\n", elapsed2*1e9);
+    ///////////////////////////////////////////////////////
+
+
+    // schubfach
+    printf("schubfach:\t");
+    char buf3[25]{}; // buf size >= 25 bytes
+
+    char* end3 = nullptr;
+
+    perf p3;
+    for (uint i = 0; i < num_runs; ++i) {
+        //end3 = dtoa(3.14159e00, buf3);
+        end3 = schubfach::dtoa(values[i % std::size(values)], buf3);
+    }
+    double elapsed3 = p3.elapsed()/num_runs;
+
+    //std::string_view str3(buf3, end3 - buf3);
+    //std::cout << std::quoted(str3) << '\t';
+    //printf("%.*s\n", static_cast<int>(end3 - buf3), buf3);
+    printf("%10.2f ns\n", elapsed3*1e9);
+    ///////////////////////////////////////////////////////
 
 
     // null
-    printf("null:\t");
+    printf("null:\t\t");
 
     perf p0;
     for (uint i = 0; i < num_runs; ++i) {
@@ -174,5 +206,6 @@ int main()
     }
     double elapsed0 = p0.elapsed()/num_runs;
 
-    printf("%.2f ns\n", elapsed0*1e9);
+    printf("%10.2f ns\n", elapsed0*1e9);
+    ///////////////////////////////////////////////////////
 }
