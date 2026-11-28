@@ -13,7 +13,7 @@ int main() {
     // The last 13 nibbles are the fraction (13x4=52 bits).
     // NOTE: print niet meer dan 1000 anders hangt de integrated terminal.
 
-    // Print 0 and then from the smallest positive subnormal upwards.
+    // Print +0 and then from the smallest positive subnormal upwards.
     //
     // The first positive double you print after +0.0 (bits = 0x0000000000000001ULL,
     // value $2^{-1074} \approx 4.9406564584124654 \times 10^{-324}$) is the smallest
@@ -38,7 +38,7 @@ int main() {
     // Print highest normals
     //
     // Biased exponent (11 bits): 0x7FE (2046)
-    // The largest exponent for finite binary64 numbers (0x7FF is reserved
+    // Is the largest exponent for finite positive binary64 numbers (0x7FF is reserved
     // for $\pm\infty$ and NaN).
     //
     // The highest normal positive double (DBL_MAX, std::numeric_limits<double>::max())

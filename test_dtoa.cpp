@@ -81,9 +81,9 @@ int main()
 
     // NOTE: we need high num_runs otherwise timings will not be correct and
     // we might get different timings in Debugger and Terminal.
-    // Also need to compile with -O3 to get the  ~6 ns as reported in:
+    // Also need to compile with -O3 to get the ~6 ns as reported in:
     // https://github.com/fmtlib/dtoa-benchmark
-    // Here on M2, zmij is consistently faster. On M1 with dtoa-benchmark we 
+    // Here zmij is consistently faster. With dtoa-benchmark we 
     // found that xjb was slightly faster.
 
     // Check
